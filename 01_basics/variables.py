@@ -17,7 +17,7 @@ print("=" * 60)
 # need to declare it like in some other languages.
 
 # 1. Integer (int) -> whole numbers, no decimal point
-age = 25
+age = 30
 print("int example:", age, "| type:", type(age))
 
 # 2. Float (float) -> numbers with a decimal point
