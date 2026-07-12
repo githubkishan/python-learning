@@ -44,7 +44,7 @@ print("tuple example:", coordinates, "| type:", type(coordinates))
 
 # 7. Dictionary (dict) -> stores data as key-value pairs
 #    Written with curly brackets { } like {key: value}
-student = {"name": "Kishan", "age": 21, "course": "Python"}
+student = {"name": "Kishan", "age": 30, "course": "Python"}
 print("dict example:", student, "| type:", type(student))
 
 # 8. Set -> an unordered collection with NO duplicate values
