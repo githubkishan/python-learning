@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Learning Journey</title>
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --border: #e5e1d8;
+    --text: #2b2b26;
+    --text-dim: #6b6b62;
+    --accent: #b5651d;
+    --accent-soft: #f1e4d3;
+    --track-bg: #eae6db;
+    --shadow: 0 1px 2px rgba(30, 25, 15, 0.06), 0 1px 1px rgba(30, 25, 15, 0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #171613;
+      --surface: #201f1b;
+      --border: #34322b;
+      --text: #ece7db;
+      --text-dim: #a39d8d;
+      --accent: #e0995f;
+      --accent-soft: #34291c;
+      --track-bg: #2b2924;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #171613; --surface: #201f1b; --border: #34322b; --text: #ece7db;
+    --text-dim: #a39d8d; --accent: #e0995f; --accent-soft: #34291c;
+    --track-bg: #2b2924; --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  }
+  :root[data-theme="light"] {
+    --bg: #f7f7f5; --surface: #ffffff; --border: #e5e1d8; --text: #2b2b26;
+    --text-dim: #6b6b62; --accent: #b5651d; --accent-soft: #f1e4d3;
+    --track-bg: #eae6db; --shadow: 0 1px 2px rgba(30, 25, 15, 0.06), 0 1px 1px rgba(30, 25, 15, 0.04);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  header.hero {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  header.hero .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  header.hero h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  header.hero p {
+    color: var(--text-dim);
+    font-size: 16px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    margin: 36px 0 44px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat .num {
+    font-size: 24px;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .progress-track {
+    height: 8px;
+    background: var(--track-bg);
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 8px 0 4px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 999px;
+    width: 100%;
+  }
+  .progress-caption {
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align: center;
+    margin-bottom: 44px;
+  }
+
+  section.module {
+    margin-bottom: 36px;
+  }
+  .module-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .module-head .tag {
+    font-size: 12px;
+    font-weight: 650;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 6px;
+    padding: 2px 8px;
+  }
+  .module-head h2 {
+    font-size: 19px;
+    margin: 0;
+  }
+  .module-head .count {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-left: auto;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    text-decoration: none;
+    color: var(--text);
+    box-shadow: var(--shadow);
+    transition: transform 0.12s ease, border-color 0.12s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  .card .file {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .card h3 {
+    margin: 0 0 8px;
+    font-size: 15px;
+  }
+  .card p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .card .topics {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .card .topics span {
+    font-size: 11px;
+    background: var(--track-bg);
+    color: var(--text-dim);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  footer {
+    margin-top: 56px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+  }
+  footer .verse {
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 14px;
+    max-width: 520px;
+    margin: 0 auto 6px;
+  }
+  footer .verse-ref {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">Python Learning Journey</span>
+    <h1>From variables to NumPy</h1>
+    <p>A self-paced curriculum with runnable lessons, practice exercises with
+       solutions, and real-world examples drawn from the Bhagavad Gita.</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><div class="num">8</div><div class="label">Lesson files</div></div>
+    <div class="stat"><div class="num">4</div><div class="label">Modules</div></div>
+    <div class="stat"><div class="num">~1,500</div><div class="label">Lines of code</div></div>
+    <div class="stat"><div class="num">30+</div><div class="label">Practice exercises</div></div>
+  </div>
+  <div class="progress-track"><div class="progress-fill"></div></div>
+  <p class="progress-caption">Curriculum complete — every file below runs standalone</p>
+
+  <section class="module">
+    <div class="module-head">
+      <span class="tag">01</span>
+      <h2>Basics</h2>
+      <span class="count">4 files</span>
+    </div>
+    <div class="cards">
+      <a class="card" href="01_basics/variables.py">
+        <div class="file">01_basics/variables.py</div>
+        <h3>Variables &amp; Data Types</h3>
+        <p>Every core data type, f-strings, and your first string methods.</p>
+        <div class="topics"><span>int/float/str/bool</span><span>list/dict/set</span><span>f-strings</span></div>
+      </a>
+      <a class="card" href="01_basics/strings.py">
+        <div class="file">01_basics/strings.py</div>
+        <h3>Strings</h3>
+        <p>Indexing, slicing, immutability, escape characters, and more methods.</p>
+        <div class="topics"><span>slicing</span><span>strip/find/count</span><span>immutability</span></div>
+      </a>
+      <a class="card" href="01_basics/lists.py">
+        <div class="file">01_basics/lists.py</div>
+        <h3>Lists</h3>
+        <p>Ordered, mutable collections — sorting, comprehensions, nesting.</p>
+        <div class="topics"><span>append/pop</span><span>comprehensions</span><span>nested lists</span></div>
+      </a>
+      <a class="card" href="01_basics/dictionaries.py">
+        <div class="file">01_basics/dictionaries.py</div>
+        <h3>Dictionaries</h3>
+        <p>Key-value storage, safe lookups, nesting, dict comprehensions.</p>
+        <div class="topics"><span>get()</span><span>.items()</span><span>nested dicts</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="module">
+    <div class="module-head">
+      <span class="tag">02</span>
+      <h2>Loops &amp; Functions</h2>
+      <span class="count">2 files</span>
+    </div>
+    <div class="cards">
+      <a class="card" href="02_loops_functions/loops.py">
+        <div class="file">02_loops_functions/loops.py</div>
+        <h3>Loops</h3>
+        <p>for, while, break/continue, enumerate(), zip(), nested loops.</p>
+        <div class="topics"><span>for/while</span><span>enumerate</span><span>zip</span></div>
+      </a>
+      <a class="card" href="02_loops_functions/functions.py">
+        <div class="file">02_loops_functions/functions.py</div>
+        <h3>Functions</h3>
+        <p>def, defaults, *args/**kwargs, return values, scope, lambdas.</p>
+        <div class="topics"><span>*args/**kwargs</span><span>lambda</span><span>scope</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="module">
+    <div class="module-head">
+      <span class="tag">03</span>
+      <h2>NumPy</h2>
+      <span class="count">1 file</span>
+    </div>
+    <div class="cards">
+      <a class="card" href="03_numpy/numpy_basics.py">
+        <div class="file">03_numpy/numpy_basics.py</div>
+        <h3>NumPy Basics</h3>
+        <p>Arrays, vectorized math, statistics, and boolean filtering.</p>
+        <div class="topics"><span>arrays</span><span>vectorized math</span><span>filtering</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="module">
+    <div class="module-head">
+      <span class="tag">★</span>
+      <h2>Practice</h2>
+      <span class="count">1 file</span>
+    </div>
+    <div class="cards">
+      <a class="card" href="practice/exercises.py">
+        <div class="file">practice/exercises.py</div>
+        <h3>Mixed Exercises</h3>
+        <p>9 combined exercises pulling from every module, each with a solution.</p>
+        <div class="topics"><span>review</span><span>solutions included</span></div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p class="verse">"You have the right to perform your duty, but never to the fruits of your actions."</p>
+    <p class="verse-ref">Bhagavad Gita 2.47 — the spirit behind every lesson in this repo: focus on practicing, not perfection.</p>
+  </footer>
+
+</div>
+</body>
+</html>
