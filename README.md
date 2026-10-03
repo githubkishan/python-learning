@@ -23,8 +23,14 @@ python-learning/
 ├── 03_numpy/
 │   └── numpy_basics.py    # arrays, vectorized math, stats, filtering
 ├── practice/
-│   └── exercises.py       # 9 mixed exercises across every topic
-├── index.html              # learning dashboard
+│   ├── exercises.py           # 9 mixed exercises across every topic
+│   ├── oop_basics.py          # classes, objects, methods, inheritance
+│   ├── exceptions_handling.py # try/except/finally, raising and custom errors
+│   ├── file_handling.py       # reading/writing files, CSV-style data
+│   ├── recursion_basics.py    # base cases, factorial, Fibonacci, nested data
+│   └── mixed_review_2.py      # a tougher mixed-review set, combining every topic
+├── gita-quiz/               # a separate interactive quiz project (see its own README)
+├── index.html                # learning dashboard
 └── README.md
 ```
 
@@ -46,6 +52,11 @@ python3 01_basics/dictionaries.py
 python3 02_loops_functions/loops.py
 python3 02_loops_functions/functions.py
 python3 practice/exercises.py
+python3 practice/oop_basics.py
+python3 practice/exceptions_handling.py
+python3 practice/file_handling.py
+python3 practice/recursion_basics.py
+python3 practice/mixed_review_2.py
 ```
 
 The NumPy lesson needs one extra package first:
