@@ -1,0 +1,33 @@
+name: Run Gita Quiz
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "gita-quiz/**"
+      - ".github/workflows/gita-quiz.yml"
+  pull_request:
+    paths:
+      - "gita-quiz/**"
+  workflow_dispatch:
+
+jobs:
+  play-quiz:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: gita-quiz
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Play a full round with automated answers
+        run: |
+          echo '## 🕉️ Gita Quiz — CI run output' >> "$GITHUB_STEP_SUMMARY"
+          echo '```text' >> "$GITHUB_STEP_SUMMARY"
+          for i in $(seq 1 12); do echo 1; done | python gita_quiz.py | tee -a "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
